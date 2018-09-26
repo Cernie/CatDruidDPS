@@ -41,4 +41,4 @@ Description of parameters (inputs to the macro)
   - Values are true or false.
   - Note the lack of quotation marks.
 - Example macro:
-- /script CatDruidDPS_main("Shred", "Ravage", "Ferocious Bite", true, "DruidBar", true, true);
+   - /script CatDruidDPS_main("Shred", "Ravage", "Ferocious Bite", true, "DruidBar", true, true);
