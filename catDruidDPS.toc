@@ -1,3 +1,4 @@
+## Author: Cernie
 ## Interface: 11200
 ## Title: CatDruidDPS
 ## Notes: Script function for smart Cat Druid DPS
