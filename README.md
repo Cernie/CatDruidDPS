@@ -11,9 +11,9 @@ To use, create a macro that uses the following signature:
 
 Description of parameters (inputs to the macro)
 -mainDamage
-  -- This is a string of the ability you wish to use in combo point generation.
-  -- Examples are "Shred", "Rake", and "Claw".
-  -- Note the quotation marks.
+   This is a string of the ability you wish to use in combo point generation.
+   Examples are "Shred", "Rake", and "Claw".
+   Note the quotation marks.
 opener
   - This is a string of the ability to use as an opener ability.
   - Examples are "Ravage" and "Pounce".
