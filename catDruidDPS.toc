@@ -1,0 +1,7 @@
+## Interface: 11200
+## Title: CatDruidDPS
+## Notes: Script function for smart Cat Druid DPS
+## Dependencies: SuperMacro
+## Version: 1.11
+catDruidDPS.xml
+catDruidDPS.lua
