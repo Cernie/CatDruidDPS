@@ -10,7 +10,7 @@ To use, create a macro that uses the following signature:
 - This addon also requires you have the Attack ability somewhere on your action bars.
 
 Description of parameters (inputs to the macro)
--mainDamage
+- mainDamage
    This is a string of the ability you wish to use in combo point generation.
    Examples are "Shred", "Rake", and "Claw".
    Note the quotation marks.
