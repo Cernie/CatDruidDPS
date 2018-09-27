@@ -160,13 +160,14 @@ function CatDruidDPS_main(mainDamage, opener, finisher, isPowerShift, druidBarAd
 		CastShapeshiftForm(currentForm);
 	elseif (currentForm ~= catForm and currentForm ~= 0) then CastShapeshiftForm(currentForm);
 	elseif (currentForm == 0) then 
-		if (currentMana ~= nil and shiftCost ~= nil and hasRuneOfMetamorphosisEquipped ~= nil and runeOfMetamorphosisCooldown == 0 and (shiftCost * 1.5) > currentMana) then 
+		if (currentMana ~= nil and shiftCost ~= nil and hasRuneOfMetamorphosisEquipped ~= nil and runeOfMetamorphosisCooldown == 0 and (shiftCost * 1.7) > currentMana) then 
 			UseInventoryItem(hasRuneOfMetamorphosisEquipped);
-		elseif (currentMana ~= nil and shiftCost ~= nil and isSelfInnervate == true and innervateCooldown == 0 and (shiftCost * 1.5) > currentMana and runeOfMetamorphosis == false) then
+		elseif (currentMana ~= nil and shiftCost ~= nil and isSelfInnervate == true and innervateCooldown == 0 and (shiftCost * 1.7) > currentMana and runeOfMetamorphosis == false) then
 			cast("Innervate", 1);
 		elseif (currentMana ~= nil and shiftCost ~= nil and isUseConsumables == true and shiftCost > currentMana and innervateBuff == false and runeOfMetamorphosis == false) then 
 			if (CatDruidDPS_canUseConsumable("potion")) then CatDruidDPS_UseManaPotion();
 			elseif (CatDruidDPS_canUseConsumable("rune")) then CatDruidDPS_UseNightDragonOrRune("rune");
+			elseif (CatDruidDPS_canUseConsumable("lily root")) then CatDruidDPS_UseNightDragonOrRune("lily root");
 			elseif (CatDruidDPS_canUseConsumable("nightdragon")) then CatDruidDPS_UseNightDragonOrRune("nightdragon");
 			end;
 		else CastShapeshiftForm(catForm);
@@ -225,10 +226,12 @@ end;
 --use a Night Dragon's Breath or a mana Rune item
 function CatDruidDPS_UseNightDragonOrRune(consumableType)
 	local nightDragon = "Night Dragon's Breath";
+	local lilyRoot = "Lily Root";
 	local demonRune = {"Demonic Rune", "Dark Rune"};
 	local msg = nil;
 	
-	if(consumableType == "nightdragon") then use(nightDragon); msg = tostring(nightDragon);
+	if(consumableType == "lily root") then use(lilyRoot); msg = tostring(lilyRoot);
+	elseif(consumableType == "nightdragon") then use(nightDragon); msg = tostring(nightDragon);
 	elseif(consumableType == "rune") then
 		if(CatDruidDPS_getSlotItemInBag(demonRune[1]) ~= nil) then use(demonRune[1]); msg = tostring(demonRune[1]);
 		elseif(CatDruidDPS_getSlotItemInBag(demonRune[2]) ~= nil) then use(demonRune[2]); msg = tostring(demonRune[2]);
@@ -269,6 +272,7 @@ function CatDruidDPS_canUseConsumable(consumableType)
 	local manaPotion = {'Superior Mana Draught', 'Major Mana Potion', 'Combat Mana Potion', 'Superior Mana Potion', 'Greater Mana Potion', 'Mana Potion', 'Lesser Mana Potion', 'Minor Mana Potion'};
 	local nightDragon = "Night Dragon's Breath";
 	local demonRune = {"Demonic Rune", "Dark Rune"};
+	local lilyRoot = "Lily Root";
 	
 	if(consumableType == "potion") then 
 		for i = 1, table.getn(manaPotion), 1
@@ -284,6 +288,12 @@ function CatDruidDPS_canUseConsumable(consumableType)
 		if(bag ~= nil and slot ~= nil) then
 			_, duration, _ = GetContainerItemCooldown(bag, slot);
 			if(duration == 0) then return tostring(nightDragon); end;
+		end;
+	elseif(consumableType == "lily root") then
+		bag, slot = CatDruidDPS_getSlotItemInBag(lilyRoot);
+		if(bag ~= nil and slot ~= nil) then
+			_, duration, _ = GetContainerItemCooldown(bag, slot);
+			if(duration == 0) then return tostring(lilyRoot); end;
 		end;
 	elseif(consumableType == "rune") then
 		for i = 1, table.getn(demonRune), 1
