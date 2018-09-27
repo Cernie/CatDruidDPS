@@ -3,6 +3,6 @@
 ## Title: CatDruidDPS
 ## Notes: Script function for smart Cat Druid DPS
 ## Dependencies: SuperMacro
-## Version: 1.11
+## Version: 1.12
 catDruidDPS.xml
 catDruidDPS.lua
