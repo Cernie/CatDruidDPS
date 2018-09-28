@@ -149,9 +149,13 @@ function CatDruidDPS_main(mainDamage, opener, finisher, isPowerShift, druidBarAd
 	--choose which action to perform
 	if (currentForm == catForm and prowl == true and (energy >= openerEnergy or clearcast == true)) then cast(opener);
 	elseif (currentForm == catForm and CatDruidDPS_findAttackActionSlot() == 0) then AttackTarget();
-	elseif (currentForm == catForm and cp >= 4 and (energy >= cpFinisher or clearcast == true)) then 
+	elseif (currentForm == catForm and cp >= 5 and (energy >= cpFinisher or clearcast == true)) then 
 		if(finisher == "Rip" and CatDruidDPS_isTargetDebuff("target", "Ability_GhoulFrenzy") == true) then finisher = "Ferocious Bite"; end;
-		cast(finisher);
+		if(finisher == abilities[1] and energy >= 60) then
+			cast(mainDamage);
+		else
+			cast(finisher);
+		end;
 	else if (currentForm == catForm and (energy >= cpMain or clearcast == true)) then 
 		cast(mainDamage);
 		if (currentForm == catForm and CatDruidDPS_findAttackActionSlot() == 0) then AttackTarget(); end;
