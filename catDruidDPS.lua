@@ -116,7 +116,10 @@ function CatDruidDPS_main(mainDamage, opener, finisher, isPowerShift, druidBarAd
 		if(shiftCost <= currentMana or runeOfMetamorphosis == true or (isSelfInnervate == true and innervateCooldown == 0) or (isUseConsumables == true and (CatDruidDPS_canUseConsumable("potion") ~= nil or CatDruidDPS_canUseConsumable("nightdragon") ~= nil or CatDruidDPS_canUseConsumable("rune") ~= nil))) then canPowerShift = true;
 		else canPowerShift = false; end;
 	end;
-
+	
+	--set canPowerShift false if no target is selected, or if target is out of range. This eliminates wasted shifting.
+	if(not UnitExists("target") or CheckInteractDistance("target", 3) ~= 1) then canPowerShift = false; end;
+	
 	--set energy requirements for main abilities
 	if (mainDamage == abilities[3]) then
 		cpMain = 60 - (impShredCurrRank * 6);
