@@ -52,6 +52,7 @@ function CatDruidDPS_main(mainDamage, opener, finisher, isPowerShift, druidBarAd
 	local energy = UnitMana("player");
 	local cpMain = nil;
 	local cpFinisher = nil;
+	local minFinisherEnergy = nil;
 	local clearcast = CatDruidDPS_isBuffTextureActive("Spell_Shadow_ManaBurn");
 	local minEnergy = nil;
 	local openerEnergy = 101;
@@ -136,6 +137,7 @@ function CatDruidDPS_main(mainDamage, opener, finisher, isPowerShift, druidBarAd
 	if (finisher == abilities[1]) then cpFinisher = 35;
 	else cpFinisher = 30;
 	end;
+	minFinisherEnergy = cpFinisher - 20;
 
 	--get user's current form
 	local currentForm = 0;
@@ -149,7 +151,7 @@ function CatDruidDPS_main(mainDamage, opener, finisher, isPowerShift, druidBarAd
 	--choose which action to perform
 	if (currentForm == catForm and prowl == true and (energy >= openerEnergy or clearcast == true)) then cast(opener);
 	elseif (currentForm == catForm and CatDruidDPS_findAttackActionSlot() == 0) then AttackTarget();
-	elseif (currentForm == catForm and cp >= 5 and (energy >= cpFinisher or clearcast == true)) then 
+	elseif (currentForm == catForm and cp >= 5 and (energy >= minFinisherEnergy or clearcast == true)) then 
 		if(finisher == "Rip" and CatDruidDPS_isTargetDebuff("target", "Ability_GhoulFrenzy") == true) then finisher = "Ferocious Bite"; end;
 		if(finisher == abilities[1] and (energy >= 63 or clearcast == true)) then
 			cast(mainDamage);
