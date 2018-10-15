@@ -117,8 +117,8 @@ function CatDruidDPS_main(mainDamage, opener, finisher, isPowerShift, druidBarAd
 		else canPowerShift = false; end;
 	end;
 	
-	--set canPowerShift false if no target is selected, or if target is out of range. This eliminates wasted shifting.
-	if(not UnitExists("target") or CheckInteractDistance("target", 2) ~= 1) then canPowerShift = false; end;
+	--set canPowerShift false if no target is selected. This eliminates wasted shifting.
+	if(not UnitExists("target")) then canPowerShift = false; end;
 	
 	--set energy requirements for main abilities
 	if (mainDamage == abilities[3]) then
