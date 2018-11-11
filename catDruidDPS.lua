@@ -45,6 +45,7 @@ function CatDruidDPS_OnLoad()
 	SLASH_CATDRUIDDPS1 = "/catdps";
 end;
 
+--commented out code includes an experimental feature of waiting for the GCD to powershift
 function CatDruidDPS_main(mainDamage, opener, finisher, isPowerShift, druidBarAddon, isUseConsumables, isSelfInnervate)
 	local abilities = {"Ferocious Bite", "Rip", "Shred", "Claw", "Rake", "Ravage", "Pounce"};
 	local cp = GetComboPoints();
@@ -74,11 +75,15 @@ function CatDruidDPS_main(mainDamage, opener, finisher, isPowerShift, druidBarAd
 	local runeOfMetamorphosis = CatDruidDPS_isBuffTextureActive("INV_Misc_Rune_06");
 	local innervateBuff = CatDruidDPS_isBuffTextureActive("Spell_Nature_Lightning");
 	local _, innervateCooldown, _ = nil;
+	--local _, mainAbilityCooldown, _ = nil;
 	local catForm = nil;
 	local prowl = CatDruidDPS_isBuffTextureActive("Ability_Ambush");
 	
 	if(CatDruidDPS_getSpellId("Innervate") ~= nil) then 
 		_, innervateCooldown, _ = GetSpellCooldown(CatDruidDPS_getSpellId("Innervate"), BOOKTYPE_SPELL); end;
+		
+	--if(CatDruidDPS_getSpellId(mainDamage) ~= nil) then 
+		--_, mainAbilityCooldown, _ = GetSpellCooldown(CatDruidDPS_getSpellId(mainDamage), BOOKTYPE_SPELL); end;
 	
 	--find out if Rune of Metamorphosis is equipped and get its cooldown
 	if(trinketLink1 ~= nil and hasRuneOfMetamorphosisEquipped == nil) then
@@ -95,7 +100,7 @@ function CatDruidDPS_main(mainDamage, opener, finisher, isPowerShift, druidBarAd
 	end;
 
 	--find out if Idol of Ferocity is equipped and set the reduction cost
-	if(itemLink ~=nil) then
+	if(itemLink ~= nil) then
 		if(string.find(itemLink, idolFerocity)) then idolCostReduction = 3; end;
 	end;
 
@@ -165,8 +170,10 @@ function CatDruidDPS_main(mainDamage, opener, finisher, isPowerShift, druidBarAd
 		cast(mainDamage);
 		if (currentForm == catForm and CatDruidDPS_findAttackActionSlot() == 0) then AttackTarget(); end;
 	elseif (currentForm == catForm and energy < minEnergy and isPowerShift == true and canPowerShift == true) then 
-		if(CatDruidDPS_findAttackActionSlot() ~= 0) then AttackTarget(); end;
-		CastShapeshiftForm(currentForm);
+		--if(mainAbilityCooldown == 0) then
+			if(CatDruidDPS_findAttackActionSlot() ~= 0) then AttackTarget(); end;
+			CastShapeshiftForm(currentForm);
+		--end;
 	elseif (currentForm ~= catForm and currentForm ~= 0) then CastShapeshiftForm(currentForm);
 	elseif (currentForm == 0) then 
 		if (currentMana ~= nil and shiftCost ~= nil and hasRuneOfMetamorphosisEquipped ~= nil and runeOfMetamorphosisCooldown == 0 and (shiftCost * 1.7) > currentMana) then 
@@ -178,6 +185,7 @@ function CatDruidDPS_main(mainDamage, opener, finisher, isPowerShift, druidBarAd
 			elseif (CatDruidDPS_canUseConsumable("rune")) then CatDruidDPS_UseNightDragonOrRune("rune");
 			elseif (CatDruidDPS_canUseConsumable("lily root")) then CatDruidDPS_UseNightDragonOrRune("lily root");
 			elseif (CatDruidDPS_canUseConsumable("nightdragon")) then CatDruidDPS_UseNightDragonOrRune("nightdragon");
+			else CastShapeshiftForm(catForm);
 			end;
 		else CastShapeshiftForm(catForm);
 		end;
