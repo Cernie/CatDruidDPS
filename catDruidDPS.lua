@@ -178,7 +178,7 @@ function CatDruidDPS_main(mainDamage, opener, finisher, isPowerShift, druidBarAd
 	elseif (currentForm == 0) then 
 		if (currentMana ~= nil and shiftCost ~= nil and hasRuneOfMetamorphosisEquipped ~= nil and runeOfMetamorphosisCooldown == 0 and (shiftCost * 1.7) > currentMana) then 
 			UseInventoryItem(hasRuneOfMetamorphosisEquipped);
-		elseif (currentMana ~= nil and shiftCost ~= nil and isSelfInnervate == true and innervateCooldown == 0 and (shiftCost * 1.7) > currentMana and runeOfMetamorphosis == false) then
+		elseif (currentMana ~= nil and shiftCost ~= nil and isSelfInnervate == true and innervateCooldown == 0 and (shiftCost * 2) > currentMana and runeOfMetamorphosis == false) then
 			cast("Innervate", 1);
 		elseif (currentMana ~= nil and shiftCost ~= nil and isUseConsumables == true and shiftCost > currentMana and innervateBuff == false and runeOfMetamorphosis == false) then 
 			if (CatDruidDPS_canUseConsumable("potion")) then CatDruidDPS_UseManaPotion();
