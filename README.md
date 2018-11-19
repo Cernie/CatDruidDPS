@@ -3,14 +3,17 @@
 # CatDruidDPS
 One button feral druid dps macro for vanilla wow.
 
-Type /catdps for usage.
-
+# Introduction
 This addon adds macro functions necessary for a druid to use for maximum dps while leveling, in dungeons/raids or for fun. While there are inputs for the user to customize, there are also checks the addon automatically does such as:
 - Determines ability costs for the druid based on talents and gear (idol slot).
 - Detects and automatically uses Rune of Metamorphosis when low on mana.
 
+# Usage
+While in game, type /catdps for usage.
+
 To use, create a macro that uses the following signature:
-/script CatDruidDPS_main(mainDamage, opener, finisher, isPowerShift, druidBarAddon, isUseConsumables, isSelfInnervate)
+
+<code>/script CatDruidDPS_main(mainDamage, opener, finisher, isPowerShift, druidBarAddon, isUseConsumables, isSelfInnervate)</code>
 - This addon also requires you have the Attack ability somewhere on your action bars.
 
 Description of parameters (inputs to the macro)
@@ -44,5 +47,6 @@ Description of parameters (inputs to the macro)
   - This is a true or false value that determines if you want the macro to automatically use innervate on yourself.
   - Values are true or false.
   - Note the lack of quotation marks.
-- Example macro:
-   - /script CatDruidDPS_main("Shred", "Ravage", "Ferocious Bite", true, "DruidBar", true, true);
+
+# Example macro
+<code>/script CatDruidDPS_main("Shred", "Ravage", "Ferocious Bite", true, "DruidBar", true, true);</code>
