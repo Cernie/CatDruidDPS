@@ -3,6 +3,14 @@
 # CatDruidDPS
 One button feral druid dps macro for vanilla wow.
 
+
+Author: Cernie
+
+
+# Installation
+
+Unzip the CatDruidDPS folder into WoW directory Interface/Addons folder. Remove the -master from the folder name.
+
 # Introduction
 This addon adds macro functions necessary for a druid to use for maximum dps while leveling, in dungeons/raids or for fun. While there are inputs for the user to customize, there are also checks the addon automatically does such as:
 - Determines ability costs for the druid based on talents and gear (idol slot).
